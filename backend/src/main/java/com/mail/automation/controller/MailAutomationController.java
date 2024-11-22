@@ -31,7 +31,7 @@ public class MailAutomationController {
 		message.setTo(trainee.getmail());
 		String subject="testing";
 		message.setSubject(subject);
-		message.setText("Hi" +trainee.gettraineeName()+ "/n Welcome to training");
+		message.setText("Hi" +trainee.gettraineeName()+ "Welcome to training");
 		message.setFrom(System.getenv("SMTP_USERNAME"));
 		mailSender.send(message);
 		return mailAutomationRepo.save(trainee);
