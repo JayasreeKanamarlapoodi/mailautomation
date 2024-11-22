@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 
 const Trainee = () => {
-  const [name, setName] = useState('');
-  const [mobile, setMobile] = useState('');
-
-  const handleSubmit = (e) => {
+  const [traineeDetails,setTraineeDetails]=useState({
+    traineeName:'',
+    mobileNumber:'',
+    mail:''
+  });
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    alert(`Name: ${name}, Mobile Number: ${mobile}`);
-    const trainee={
-        Name: name,
-        Number:mobile
-    }
-    console.log("trainee",trainee)
+    console.log("trainee",traineeDetails);
+    const response=await fetch("http://localhost:8080/api/trainees",{
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(traineeDetails),
+    });
+    console.log("response",response)
   };
-
   return (
     <div>
       <h2>Trainee Registration Form</h2>
@@ -22,8 +26,8 @@ const Trainee = () => {
           <label>Name:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={traineeDetails.traineeName}
+            onChange={(e) => setTraineeDetails({...traineeDetails,traineeName:e.target.value})}
             placeholder="Enter your name"
           />
         </div>
@@ -31,9 +35,18 @@ const Trainee = () => {
           <label>Mobile Number:</label>
           <input
             type="text"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            value={traineeDetails.mobileNumber}
+            onChange={(e) => setTraineeDetails({...traineeDetails,mobileNumber:e.target.value})}
             placeholder="Enter your mobile number"
+          />
+        </div>
+        <div>
+          <label>Mail:</label>
+          <input
+            type="mail"
+            value={traineeDetails.mail}
+            onChange={(e) => setTraineeDetails({...traineeDetails,mail:e.target.value})}
+            placeholder="Enter your mail id"
           />
         </div>
         <button type="submit">Submit</button>
