@@ -1,57 +1,94 @@
+import { Box, Button, Card, CardContent, CardHeader, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Trainee = () => {
-  const [traineeDetails,setTraineeDetails]=useState({
-    traineeName:'',
-    mobileNumber:'',
-    mail:''
+  const [traineeDetails, setTraineeDetails] = useState({
+    traineeName: '',
+    mobileNumber: '',
+    mail: ''
   });
-  const handleSubmit =async (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("trainee",traineeDetails);
-    const response=await fetch("http://localhost:8080/api/trainees",{
-      method:"POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(traineeDetails),
-    });
-    console.log("response",response)
+    console.log("trainee", traineeDetails);
+    navigate("/checkDetails", { state: traineeDetails })
   };
   return (
-    <div>
-      <h2>Trainee Registration Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={traineeDetails.traineeName}
-            onChange={(e) => setTraineeDetails({...traineeDetails,traineeName:e.target.value})}
-            placeholder="Enter your name"
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f4f4f4",
+        }}
+      >
+        <Card sx={{ width: 400, boxShadow: 3, borderRadius: 2 }}>
+          <CardHeader
+            title="Trainee Registration Form"
+            titleTypographyProps={{ variant: "h5", fontWeight: "bold" }}
+            sx={{ textAlign: "center", backgroundColor: "#007BFF", color: "white", py: 2 }}
           />
-        </div>
-        <div>
-          <label>Mobile Number:</label>
-          <input
-            type="text"
-            value={traineeDetails.mobileNumber}
-            onChange={(e) => setTraineeDetails({...traineeDetails,mobileNumber:e.target.value})}
-            placeholder="Enter your mobile number"
-          />
-        </div>
-        <div>
-          <label>Mail:</label>
-          <input
-            type="mail"
-            value={traineeDetails.mail}
-            onChange={(e) => setTraineeDetails({...traineeDetails,mail:e.target.value})}
-            placeholder="Enter your mail id"
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+          <CardContent>
+            <form onSubmit={handleSubmit}>
+              <Box sx={{ mb: 3 }}>
+                <TextField
+                  fullWidth
+                  label="Name"
+                  variant="outlined"
+                  type="text"
+                  value={traineeDetails.traineeName}
+                  onChange={(e) => setTraineeDetails({ ...traineeDetails, traineeName: e.target.value })}
+                  placeholder="Enter your name"
+                  required
+                />
+              </Box>
+              <Box sx={{ mb: 3 }}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  label="Mobile Number"
+                  variant="outlined"
+                  value={traineeDetails.mobileNumber}
+                  onChange={(e) => setTraineeDetails({ ...traineeDetails, mobileNumber: e.target.value })}
+                  placeholder="Enter your mobile number"
+                  required
+                />
+              </Box>
+              <Box sx={{ mb: 3 }}>
+                <TextField
+                  fullWidth
+                  label="Mail Id"
+                  variant="outlined"
+                  type="mail"
+                  value={traineeDetails.mail}
+                  onChange={(e) => setTraineeDetails({ ...traineeDetails, mail: e.target.value })}
+                  placeholder="Enter your mail id"
+                  required
+                />
+              </Box>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  backgroundColor: "#007BFF",
+                  "&:hover": { backgroundColor: "#0056b3" },
+                }}
+
+              >
+                Submit
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+        {/* <div>
+      <button type='button' onClick={()=>navigate("/full-details")}>Click to Fullfill Details</button>
+    </div> */}
+      </Box>
+    </>
   );
 };
 
