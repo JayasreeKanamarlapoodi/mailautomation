@@ -1,34 +1,31 @@
 import { Box, Button, Card, CardContent, CardHeader, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { postingTraineeDetails } from "../../redux/trainee/traineeAction";
 
 
 const CheckingDetails = () => {
     const navigate=useNavigate();
+     const dispatch=useDispatch();
     const location = useLocation();
-    console.log(location)
     const traineeDetails = location.state;
     const [trainee,setTrainee]=useState({
         traineeName:traineeDetails.traineeName,
     mobileNumber:traineeDetails.mobileNumber,
     mail: traineeDetails.mail
 })
-console.log(trainee)
+const status=useSelector((state)=>state.trainee.status)
+const message=useSelector((state)=>state.trainee.message)
+    useEffect(()=>{
+        if(status)
+        navigate("/successMsg");
+    },[status,message])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("trainee", trainee);
-        const response = await fetch("http://localhost:8080/api/traineesWithHtmlBody", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(trainee),
-        });
-        console.log(response.ok)
-        if (response.ok) {
-          console.log("hi")
-          navigate("/successMsg")
-        }
+        dispatch(postingTraineeDetails(trainee));
       };
     return (
         <>

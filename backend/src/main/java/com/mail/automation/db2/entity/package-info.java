@@ -1,0 +1,1 @@
+package com.mail.automation.db2.entity;

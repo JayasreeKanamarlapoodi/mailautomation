@@ -1,4 +1,4 @@
-package com.mail.automation.entity;
+package com.mail.automation.db2.entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
