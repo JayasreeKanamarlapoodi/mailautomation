@@ -11,7 +11,7 @@ const Trainee = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("trainee", traineeDetails);
+    console.log(sessionStorage.getItem("jwtToken"))
     navigate("/checkDetails", { state: traineeDetails })
   };
   return (

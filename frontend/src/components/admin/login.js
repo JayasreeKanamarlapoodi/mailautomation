@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Card, CardContent, CardHeader, TextField, Button } from "@mui/material";
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginVerification } from '../../redux/admin/adminAction';
 
 const LoginForm = () => {
+  const dispatch=useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const status=useSelector((state)=>state.admin.status);
+  const message=useSelector((state)=>state.admin.message);
+  const token=useSelector((state)=>state.admin.token);
+  useEffect(()=>{
+    if(status)
+    {
+      console.log("message",status, message);
+      console.log("token in login",token);
+      navigate('/home')
+    }
+    else
+    {
+      console.log("message",status, message);
+    }
+  },[status,message])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dummy check for username and password
-    console.log("username",username);
-    console.log("password",password)
-
-    if (username === 'admin' && password === 'password') {
-      navigate('/trainee');
-    } else {
-      alert('Invalid credentials');
-    }
+    dispatch(LoginVerification({username,password}))
   };
 
   return (

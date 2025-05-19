@@ -1,0 +1,108 @@
+/* Full screen background */
+.background-container {
+  background-image: url('../../assets/images/freepik__upload__73102.png'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Logout button */
+.logout {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  color: Black;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout:hover {
+  background-color: rgba(255, 69, 58, 1);
+  transform: scale(1.05);
+}
+
+/* Header styling */
+.header {
+    position: absolute;
+    top:20%;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size:60px;
+  color: #fff;
+}
+
+/* Buttons group */
+.button-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: absolute;
+  top:40%
+}
+
+.action-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: 0.3s ease;
+  min-width: 150px;
+}
+
+.action-button:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  background-color: rgba(0, 128, 0, 0.8);
+  color: white;
+}
+
+.rejected {
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .action-button {
+    width: 80%;
+    font-size: 15px;
+  }
+
+  .logout {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}

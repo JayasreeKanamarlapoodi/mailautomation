@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html 
+	xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Email</title>
 </head>
 <body>
-    <h3>Hi Jayasree Welcome to Our Service!</h3>
-    <p>Click the button below to download your PDF file:</p>
-    <img src="cid:embeddedImage" alt="Example Image" style="width: 200px; height: auto;" />
+    <h3>Welcome,<span th:text="${name}"></span>!</h3>
+    <p>We are excited to have you onboard.</p>
+    <img th:src="${imageUrl}" alt="Company Logo" />
 </body>
 </html>
+
+
